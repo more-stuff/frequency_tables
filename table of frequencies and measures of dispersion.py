@@ -8,7 +8,7 @@ from tabulate import tabulate
 
 
 print('Como quieres dar los datos')
-print('1. sin intervalor')
+print('1. sin intervalos')
 print('2. con intervalos')
 typeGettingData = input()
 
@@ -38,7 +38,6 @@ if typeGettingData.isnumeric():
 
         fi = [0] * (len(X))
         for num in Xi:
-#            print(fi[X.index(num)])
             fi[X.index(num)] += 1
 
 
@@ -156,7 +155,6 @@ if typeGettingData.isnumeric():
             i += 1
         n = table[len(table) - 1, 3]
 
-        print(n)
         # hi
         for column in table:
             column[4] = column[2] / n
