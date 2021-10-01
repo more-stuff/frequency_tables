@@ -261,7 +261,7 @@ if typeGettingData.isnumeric():
         head = ["X", "fi", 'Fi', 'hi', 'Hi', 'porcentaje']
         print(tabulate(info, headers = head))
 
-
+    print()
     print(f"Media = {average}")
     print(f"Desviacion mediana = {average_deviation}")
     print(f"Varianza = {variance}")
