@@ -1,6 +1,10 @@
 from typing import OrderedDict
 import numpy as np
 from numpy.lib.function_base import average
+from pandas import DataFrame
+from timeit import timeit
+from tabulate import tabulate
+
 
 
 print('Como quieres dar los datos')
@@ -19,23 +23,28 @@ if typeGettingData.isnumeric():
         Xi = Xi.split(' ')
         if Xi[len(Xi) - 1] == '':
             Xi.pop()
-        X = []
 
         i = 0
         while i < len(Xi):
             Xi[i] = int(Xi[i])
             i += 1
 
-        fi = [0] * max(Xi)
+        X = []
 
         for num in Xi:
             if not num in X:
                 X.append(num)
-            fi[num - 1] += 1
-        X.sort()
+                X = sorted(X)
+
+        fi = [0] * (len(X))
+        for num in Xi:
+#            print(fi[X.index(num)])
+            fi[X.index(num)] += 1
+
+
+
 
         table = np.zeros((len(X), 6))
-
         # fi
         i = 0
         while i < len(X):
@@ -194,16 +203,64 @@ if typeGettingData.isnumeric():
 
     size = len(table[1])
     print(size)
-    if size == 6:
-        print("X  |  fi  |  Fi  |  hi  |  Hi  |  % ")
-    else:
-        print("X |  fi  |  Fi  |  hi  |  Hi  |  marca de clase  |  % ")
 
-    for column in table:
-        if size == 6:
-            print(f"{column[0]} | {column[1]} | {column[2]} | {column[3]} | {column[4]} | {column[5]}")
-        else:
-            print(f"{column[0]} | {column[1]} | {column[2]} | {column[3]} | {column[4]} | {column[5]} | {column[6]} | {column[7]}")
+    
+
+    
+
+    if size == 6:
+        X = []
+        fi = []
+        Fi = []
+        hi = []
+        Hi = []
+        porcentaje = []
+
+        for column in table:
+            X.append(column[0])
+            fi.append(column[1])
+            Fi.append(column[2])
+            hi.append(column[3])
+            Hi.append(column[4])
+            porcentaje.append(column[5])
+
+        info = {'X': X,
+            'fi': fi,
+            'Fi': Fi,
+            'hi': hi,
+            'Hi': Hi,
+            'Porcentaje': porcentaje}
+        head = ["X", "fi", 'Fi', 'hi', 'Hi', 'porcentaje']
+
+        print(tabulate(info, headers = head))
+
+    else:
+        X = []
+        fi = []
+        Fi = []
+        hi = []
+        Hi = []
+        porcentaje = []
+        mark_class = []
+
+        for column in table:
+            X.append(column[0])
+            fi.append(column[1])
+            Fi.append(column[2])
+            hi.append(column[3])
+            Hi.append(column[4])
+            porcentaje.append(column[5])
+            mark_class.append(column[6])
+        info = [{'X': X,
+            'fi': fi,
+            'Fi': Fi,
+            'hi': hi,
+            'Hi': Hi,
+            'Porcentaje': porcentaje,
+            'Marca de clase': mark_class}]
+        head = ["X", "fi", 'Fi', 'hi', 'Hi', 'porcentaje']
+        print(tabulate(info, headers = head))
+
 
     print(f"Media = {average}")
     print(f"Desviacion mediana = {average_deviation}")
